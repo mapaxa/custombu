@@ -1,12 +1,15 @@
 <?php 
 
-$bu_path = __DIR__ .'/backup' ;
-echo $bu_path;
-if(file_exists($bu_path)) {
-	
+//создать папку 
+$bu_path = __DIR__ .'/backup/' ;
+if(!file_exists($bu_path)) {
+	mkdir($bu_path, 0777);
 }
-
-
+//создать файл
+$filename = 'mysqldump_BU_' . date('ymd') . '.sql';
+$full_bu_path = $bu_path.$filename; 
+//echo $full_bu_path;
+//подключить к БД
 class Db {
 	public static function getConnection() {
 		$params =  array(
@@ -21,3 +24,6 @@ class Db {
 		return $db;
 	}
 }
+
+
+
